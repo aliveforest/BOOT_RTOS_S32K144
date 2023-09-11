@@ -1,0 +1,15 @@
+-c
+-I"D:/dengtongbei/workspaceS32DS.ARM.2.2/BOOT_RTOS/Generated_Code/"
+-I"D:/dengtongbei/workspaceS32DS.ARM.2.2/BOOT_RTOS/Sources/HardwareLib"
+-x assembler-with-cpp
+-DTURN_ON_CPU0
+-DSEMIHOSTING
+-DUSING_OS_FREERTOS
+-g3
+-mcpu=cortex-m4
+-mthumb
+-mfloat-abi=hard
+-mfpu=fpv4-sp-d16
+-specs=nano.specs
+-specs=nosys.specs
+--sysroot="E:/NXP/S32DS_ARM_v2.2/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib"
