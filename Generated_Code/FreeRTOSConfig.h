@@ -7,7 +7,7 @@
 **     Version     : Component SDK_S32K1xx_15, Driver 01.00, CPU db: 3.00.000
 **     Repository  : SDK_S32K1xx_15
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2023-09-11, 15:23, # CodeGen: 12
+**     Date/Time   : 2023-09-12, 16:40, # CodeGen: 14
 **     Contents    :
 **         xCoRoutineCreate               - BaseType_t xCoRoutineCreate( crCOROUTINE_CODE pxCoRoutineCode, UBaseType_t...
 **         crDELAY                        - #define crDELAY( xHandle, xTicksToDelay );
@@ -205,6 +205,7 @@
 extern volatile uint32_t CPU_RunTime;
 #define configGENERATE_RUN_TIME_STATS            1 
 #define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() (CPU_RunTime = 0ul) /* nothing */ /* default: use Tick counter as runtime counter */   
+                                                 /* extern volatile uint32_t CPU_RunTime; */
 #define portGET_RUN_TIME_COUNTER_VALUE()         CPU_RunTime/* default: use Tick counter as runtime counter */ 
 #define configUSE_TRACE_FACILITY                 1
 #define configUSE_STATS_FORMATTING_FUNCTIONS     1

@@ -59,7 +59,7 @@ void LPUART1_init(void)
 												/* SBK=0: Normal transmitter operation - no break char */
 												/* LOOPS,RSRC=0: no loop back */
 	while((bool)((LPUART1->CTRL & LPUART_CTRL_RE_MASK) != 0U) != 1u) {}
-	LPUART1_NVIC_init_IRQs(LPUART1_RxTx_IRQn, 0x02);
+	LPUART1_NVIC_init_IRQs(LPUART1_RxTx_IRQn, 0x00);
 }
 /* 中断配置 */
 void LPUART1_NVIC_init_IRQs (uint32_t vector_number, uint32_t priority) {
@@ -111,7 +111,6 @@ uint8_t LPUART1_receive_char(uint8_t * rec, uint32_t timeout) {
 	return 2;
 }
 
-#ifdef YMODEM  /* 如果使用YMODEM协议 */
 
 uint8_t receivebuff[PACKET_HEAD+PACKET_1024_SIZE+PACKET_TAIL];
 volatile uint8_t data_c=0;
@@ -135,25 +134,22 @@ void LPUART1_RxTx_IRQHandler(void){
 	if(rev_i>=PACKET_HEAD+PACKET_1024_SIZE+PACKET_TAIL) rev_i=0;
 }
 
-#endif
 
-#ifndef YMODEM  /* 如果不使用YMODEM协议 */
 
-char receivebuff[200];
-uint16_t rev_i=0;
-void LPUART1_RxTx_IRQHandler(void){
-	while((LPUART1->STAT & LPUART_STAT_RDRF_MASK)>>LPUART_STAT_RDRF_SHIFT==0){
-		/* Wait for received buffer to be full */
-	}
-	receivebuff[rev_i++]= LPUART1->DATA;            /* Read received data*/
-	if (receivebuff[rev_i - 1] == '\n' || rev_i >= sizeof(receivebuff)) {
-		receivebuff[rev_i] = '\0';
-		rev_i = 0;
-		LPUART1_printf(receivebuff);
-	}
-}
+// char receivebuff[200];
+// uint16_t rev_i=0;
+// void LPUART1_RxTx_IRQHandler(void){
+// 	while((LPUART1->STAT & LPUART_STAT_RDRF_MASK)>>LPUART_STAT_RDRF_SHIFT==0){
+// 		/* Wait for received buffer to be full */
+// 	}
+// 	receivebuff[rev_i++]= LPUART1->DATA;            /* Read received data*/
+// 	if (receivebuff[rev_i - 1] == '\n' || rev_i >= sizeof(receivebuff)) {
+// 		receivebuff[rev_i] = '\0';
+// 		rev_i = 0;
+// 		LPUART1_printf(receivebuff);
+// 	}
+// }
 
-#endif
 
 
 

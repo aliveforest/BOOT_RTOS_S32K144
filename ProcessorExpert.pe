@@ -3,7 +3,7 @@
   <Header>
     <Name>BOOT_RTOS</Name>
     <SavedBy>dengtongbei</SavedBy>
-    <ModificationStamp>8</ModificationStamp>
+    <ModificationStamp>9</ModificationStamp>
     <Date>2023-09-08</Date>
     <IDE>Eclipse IDE</IDE>
     <PEversion>1.12.2.RT7_b1743-0713</PEversion>
@@ -14951,7 +14951,7 @@
         <ItemSymbol>ProjectComponentsCountChanged</ItemSymbol>
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
-        <Value>2</Value>
+        <Value>1</Value>
       </ItemState>
       <ItemState>
         <ItemSymbol>ModuleName_ADC</ItemSymbol>
@@ -15822,8 +15822,9 @@
         <ReadOnly>false</ReadOnly>
         <UserReadOnly>false</UserReadOnly>
         <Value>(string list)</Value>
-        <StrgList lines_count="1">
+        <StrgList lines_count="2">
           <Line>(CPU_RunTime = 0ul) /* nothing */ /* default: use Tick counter as runtime counter */</Line>
+          <Line>/* extern volatile uint32_t CPU_RunTime; */</Line>
         </StrgList>
       </ItemState>
       <ItemState>

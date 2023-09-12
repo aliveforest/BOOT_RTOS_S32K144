@@ -17,7 +17,7 @@
       <GenExtraFiles lines_count="1">
         <Line>Generated_Code\FreeRTOSConfig.h</Line>
       </GenExtraFiles>
-      <XtraAge0>1462467302</XtraAge0>
+      <XtraAge0>1462535426</XtraAge0>
       <GenExtraFileType0>4</GenExtraFileType0>
       <GenLinkedFiles lines_count="0" />
       <SynchronizedStaticFile>
@@ -548,7 +548,7 @@
     </GenFiles>
     <SignalListFile />
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>8</ProjectModificationStamp>
+    <ProjectModificationStamp>9</ProjectModificationStamp>
   </Options>
   <CpuID_1>
     <Generated>true</Generated>

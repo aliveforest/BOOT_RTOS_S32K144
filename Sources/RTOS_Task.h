@@ -22,28 +22,28 @@
 /* START_TASK 任务配置
  * 包含：任务句柄、任务优先级、堆栈大小、创建任务 */
 TaskHandle_t start_task_handler;
-#define START_TASK_PRIO 			(1u)
+#define START_TASK_PRIO 			(2u)
 #define START_TASK_STACK_SIZE 		(128u) /* 设置的最小堆栈大小 128*4 bytes */
 void start_task(void);
 
 /* KEY_TASK 任务配置
  * 包含：任务句柄、任务优先级、堆栈大小、创建任务 */
 TaskHandle_t key_task_handler;
-#define KEY_TASK_PRIO               (8u)
+#define KEY_TASK_PRIO               (10u)
 #define KEY_TASK_STACK_SIZE         (512U) /* 设置堆栈大小 512*4 bytes */
 void key_task(void);
 
 /* SHOW_TASK 任务配置
  * 包含：任务句柄、任务优先级、堆栈大小、创建任务 */
 TaskHandle_t show_task_handler;
-#define SHOW_TASK_PRIO            (2u)
+#define SHOW_TASK_PRIO            (3u)
 #define SHOW_TASK_STACK_SIZE     (128u) /* 设置的最小堆栈大小 128*4 bytes */
 void show_task(void);
 
 /* CPU_TASK 任务配置
  * 包含：任务句柄、任务优先级、堆栈大小、创建任务 */
 TaskHandle_t cpu_task_handler;
-#define CPU_TASK_PRIO           (3u)
+#define CPU_TASK_PRIO           (4u)
 #define CPU_TASK_STACK_SIZE     (512u)
 void cpu_task(void);
 
