@@ -12,6 +12,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+#define YMODEM   /* 使用YMODEM协议 */
 
 /* Init. summary: 115200 baud, 1 stop bit, 8 bit format, no parity */
 void LPUART1_init(void)
@@ -106,6 +107,8 @@ uint8_t LPUART1_receive_char(uint8_t * rec, uint32_t timeout) {
 	return 2;
 }
 
+#ifdef YMODEM  /* 如果使用YMODEM协议 */
+
 uint8_t receivebuff[PACKET_HEAD+PACKET_1024_SIZE+PACKET_TAIL];
 volatile uint8_t data_c=0;
 volatile uint32_t rev_i=0;
@@ -128,20 +131,25 @@ void LPUART1_RxTx_IRQHandler(void){
 	if(rev_i>=PACKET_HEAD+PACKET_1024_SIZE+PACKET_TAIL) rev_i=0;
 }
 
+#endif
 
-// char receivebuff[200];
-// uint16_t rev_i=0;
-// void LPUART1_RxTx_IRQHandler(void){
-// 	while((LPUART1->STAT & LPUART_STAT_RDRF_MASK)>>LPUART_STAT_RDRF_SHIFT==0){
-// 		/* Wait for received buffer to be full */
-// 	}
-// 	receivebuff[rev_i++]= LPUART1->DATA;            /* Read received data*/
-// 	if (receivebuff[rev_i - 1] == '\n' || rev_i >= sizeof(receivebuff)) {
-// 		receivebuff[rev_i] = '\0';
-// 		rev_i = 0;
-// 		LPUART1_printf(receivebuff);
-// 	}
-// }
+#ifndef YMODEM  /* 如果不使用YMODEM协议 */
+
+char receivebuff[200];
+uint16_t rev_i=0;
+void LPUART1_RxTx_IRQHandler(void){
+	while((LPUART1->STAT & LPUART_STAT_RDRF_MASK)>>LPUART_STAT_RDRF_SHIFT==0){
+		/* Wait for received buffer to be full */
+	}
+	receivebuff[rev_i++]= LPUART1->DATA;            /* Read received data*/
+	if (receivebuff[rev_i - 1] == '\n' || rev_i >= sizeof(receivebuff)) {
+		receivebuff[rev_i] = '\0';
+		rev_i = 0;
+		LPUART1_printf(receivebuff);
+	}
+}
+
+#endif
 
 
 
