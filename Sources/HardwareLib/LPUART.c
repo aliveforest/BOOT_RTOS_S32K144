@@ -59,13 +59,17 @@ void LPUART1_init(void)
 												/* SBK=0: Normal transmitter operation - no break char */
 												/* LOOPS,RSRC=0: no loop back */
 	while((bool)((LPUART1->CTRL & LPUART_CTRL_RE_MASK) != 0U) != 1u) {}
-	LPUART1_NVIC_init_IRQs();
+	LPUART1_NVIC_init_IRQs(LPUART1_RxTx_IRQn, 0x02);
 }
-
-void LPUART1_NVIC_init_IRQs (void) {
-	S32_NVIC->ICPR[1] = 1 << (LPUART1_RxTx_IRQn % 32);  /* IRQ48-LPIT0 ch0: clr any pending IRQ*/
-	S32_NVIC->ISER[1] = 1 << (LPUART1_RxTx_IRQn % 32);  /* IRQ48-LPIT0 ch0: enable IRQ */
-	S32_NVIC->IP[LPUART1_RxTx_IRQn] = 0x03;              /* IRQ48-LPIT0 ch0: priority 10 of 0-15*/
+/* 中断配置 */
+void LPUART1_NVIC_init_IRQs (uint32_t vector_number, uint32_t priority) {
+	uint8_t shift = (uint8_t) (8U - FEATURE_NVIC_PRIO_BITS);
+	/* 清除任何挂起的 IRQ */
+	S32_NVIC->ISER[(uint32_t)(vector_number) >> 5U] = (uint32_t)(1U << ((uint32_t)(vector_number) & (uint32_t)0x1FU));
+	/* 使能 IRQ */
+	S32_NVIC->ICPR[(uint32_t)(vector_number) >> 5U] = (uint32_t)(1U << ((uint32_t)(vector_number) & (uint32_t)0x1FU));
+	/* 优先级设置 */
+	S32_NVIC->IP[(uint32_t)vector_number] = (uint8_t)(((((uint32_t)priority) << shift)) & 0xFFUL);
 }
 
 /* 发送单个字符函数 */
