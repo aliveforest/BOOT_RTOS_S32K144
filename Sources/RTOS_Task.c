@@ -88,10 +88,12 @@ void key_task(void){
 //    	LPUART1_printf("key_task\r\n");
         if(SW2_key()){
 			LPUART1_printf("KEY2 press!\r\n");
+			taskENTER_CRITICAL();               /* 进入临界区 */
 			later_ms(500);
 			LPUART1_printf("	Enter APP...\r\n");
 			later_ms(500);
 			Boot_to_App(appEntry, appstack);
+			taskEXIT_CRITICAL();                /* 退出临界区 */
 		}
 		else if(SW3_key()){ /* update APP */
 			LPUART1_printf("KEY3 press!\r\n");
