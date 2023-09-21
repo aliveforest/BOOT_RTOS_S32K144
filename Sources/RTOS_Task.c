@@ -112,7 +112,7 @@ void key_task(void){
 /* show information */
 void show_task(void){
     for (;;){
-        LPUART1_printf("_____BootLoader_____ \r\n");
+        LPUART1_printf("------BootLoader------ \r\n");
         vTaskDelay(500);
     }
 }
