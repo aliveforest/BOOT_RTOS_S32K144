@@ -112,7 +112,7 @@ void key_task(void){
 /* show information */
 void show_task(void){
     for (;;){
-        LPUART1_printf("------BootLoader------ \r\n");
+        LPUART1_printf("------BootLoader------\r\n");
         vTaskDelay(500);
     }
 }
@@ -149,10 +149,13 @@ void Boot_to_App(uint32_t appEntry, uint32_t appstack) {
 	static uint32_t stack_pointer;
 	jump_to_application = (void (*)(void))appEntry; /*函数指针指向app的复位向量表的地址。注意将地址强转成函数入口地址 */
 	stack_pointer = appstack;
-	S32_SCB->VTOR = (uint32_t)APP_START_ADDRESS; // 设置中断向量
-	INT_SYS_DisableIRQGlobal();					 // 关闭全局中断
+	S32_SCB->VTOR = (uint32_t)APP_START_ADDRESS;  // 设置中断向量
+	INT_SYS_DisableIRQGlobal();				  // 关闭全局中断
 	__asm volatile("MSR msp, %0\n" : : "r"(stack_pointer) : "sp"); // 设置堆栈指针
 	__asm volatile("MSR psp, %0\n" : : "r"(stack_pointer) : "sp");
 	jump_to_application(); // 进行跳转
 }
+
+
+
 

@@ -10,7 +10,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 
-/* 1 字 = 4 字节 (1 word = 2 bytes) 32位
+/* 1 字 = 4 字节 (1 word = 4 bytes) 32位
  * 1字节 =8 比特 (1 byte = 8bits)
  * 1 Byte = 8 Bits
  * 1 KB = 1024 Bytes
